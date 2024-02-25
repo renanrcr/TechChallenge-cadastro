@@ -19,7 +19,7 @@ var server = builder.Configuration["DbServer"] ?? "localhost";
 var port = builder.Configuration["DbPort"] ?? "1433"; // Default SQL Server port
 var user = builder.Configuration["DbUser"] ?? "SA"; // Warning do not use the SA account
 var password = builder.Configuration["Password"] ?? "TechChallenge#Fase02";
-var database = builder.Configuration["Database"] ?? "Lanchonete";
+var database = builder.Configuration["Database"] ?? "lanchonete_cadastro";
 var connectionString = $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password};TrustServerCertificate=true";
 builder.Services.AddDbContext<DataBaseContext>(options =>
     options.UseSqlServer(connectionString));
