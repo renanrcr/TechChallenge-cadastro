@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    deployment: sqlserver
+  name: service-sqlserver
+  namespace: default
+spec:
+  ports:
+  - name: sqlserver
+    port: 11433
+    protocol: TCP
+    targetPort: 11433
+  selector:
+    app: sqlserver
+    type: LoadBalancer

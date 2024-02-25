@@ -1,0 +1,46 @@
+version: '3.4'
+
+services:
+  techchallenge:
+    image: ${DOCKER_REGISTRY-}techchallenge/lanchonete:dev
+    container_name: lanchonete-app
+    build:
+      context: ../
+      dockerfile: src/Dockerfile
+    networks:
+      - techchallenge-bridge
+    ports:
+      - "1443:443"
+    expose:
+      - 1443 
+    environment:
+        DbServer: "sqlserver"
+        DbPort: "1433"
+        DbUser: "SA"
+        Password: "TechChallenge#Fase02"
+        Database: "Lanchonete"
+    depends_on:
+      - sqlserver
+
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sqlserver
+    hostname: 'sqlserver'
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: "TechChallenge#Fase02"
+      MSSQL_PID: Express
+    volumes:
+      - c:/dados/volumes/mssql/data:/var/opt/mssql/data
+      - c:/dados/volumes/mssql/log:/var/opt/mssql/log
+      - c:/dados/volumes/mssql/secrets:/var/opt/mssql/secrets
+    networks:
+      - techchallenge-bridge
+    ports:
+      - "11433:1433"
+    expose:
+      - 1433
+
+networks:
+  techchallenge-bridge:
+   driver: bridge

@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "4eca1003-1697-437a-929c-640654b2e212",
+		"name": "TechChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16032923"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Todos os Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Cliente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Teste\",\r\n  \"email\": \"teste123@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Cliente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"e966faa3-1295-41fb-aa6c-b569391ecf9c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Cliente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"732e3f0f-7dc2-410e-8886-6ba49b99d305\",\r\n  \"nome\": \"Testando\",\r\n  \"email\": \"email@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Cliente",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categoria Produto",
+			"item": [
+				{
+					"name": "Todos as Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/CategoriaProduto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"CategoriaProduto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Lanche",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"descricao\": \"Lanche\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/CategoriaProduto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"CategoriaProduto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Bebida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"descricao\": \"Bebida\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/CategoriaProduto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"CategoriaProduto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Sobremesa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"descricao\": \"Sobremesa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/CategoriaProduto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"CategoriaProduto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "Todos os Produto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Produto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Produto por Categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Produto/produto-por-categoria?categoriaId=3B19F7E7-B517-4C7C-BBE2-625E4FFAB34E",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto",
+								"produto-por-categoria"
+							],
+							"query": [
+								{
+									"key": "categoriaId",
+									"value": "3B19F7E7-B517-4C7C-BBE2-625E4FFAB34E"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Lanche",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoriaProdutoId\": \"f2e62a1b-9db6-4234-bef3-348ca5742a71\",\r\n  \"nome\": \"X-Salada\",\r\n  \"descricao\": \"Ingredientes: pão, hamburguer e alface\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Produto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Bebida",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoriaProdutoId\": \"84b028a9-db34-430b-8957-34cbb21ee080\",\r\n  \"nome\": \"Refri Guaraná\",\r\n  \"descricao\": \"Refrigerante sabor guaraná\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Produto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Sobremesa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoriaProdutoId\": \"3B19F7E7-B517-4C7C-BBE2-625E4FFAB34E\",\r\n  \"nome\": \"Sorvete Morango\",\r\n  \"descricao\": \"Soverte sabor morango\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Produto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Nome Bebida",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"e304d117-046f-4c81-9b15-f40690bcb819\",\r\n   \"categoriaProdutoId\": \"84b028a9-db34-430b-8957-34cbb21ee080\",\r\n  \"nome\": \"Guaraná\",\r\n  \"descricao\": \"Refrigerante sabor guaraná\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Produto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"C82ED0BF-45FC-495B-BA88-F15B2BA19FF8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Produto",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Produto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Identificação Cliente",
+			"item": [
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"valor\": \"12312341234\",\r\n  \"tipodIdentificacaoPedido\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Identificacao",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Identificacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ObterIdentificaoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Identificacao",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Identificacao"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Todas os Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Pedido",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identificacaoClienteId\": \"66AA6BFC-7BA7-495F-8816-729E8FB17385\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/Pedido",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Pedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Itens Pedido",
+			"item": [
+				{
+					"name": "Todos os Itens",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ItemPedido",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ItemPedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pedidoId\": \"F49C8FB2-8BDF-4395-95F4-DEB1432FD561\",\r\n  \"produtoId\": \"531A2595-BB9C-4819-AEFA-68C4F17C8D52\",\r\n  \"quantidade\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/ItemPedido",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ItemPedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WebHook",
+			"item": [
+				{
+					"name": "send",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "testando",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/webhook",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CheckoutPedido",
+			"item": [
+				{
+					"name": "CheckoutPedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tipodIdentificacaoCliente\": 0,\r\n  \"identificacaoCliente\": \"string\",\r\n  \"itensPedido\": [\r\n    {\r\n      \"pedidoId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"produtoId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n      \"quantidade\": 0\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/CheckoutPedido",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"CheckoutPedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "StatusPagamentoPedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Pedido/StatusPagamentoPedido?numeroDoPedido=asdfasdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Pedido",
+								"StatusPagamentoPedido"
+							],
+							"query": [
+								{
+									"key": "numeroDoPedido",
+									"value": "asdfasdf"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizaStatusPedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/Pedido/AtualizaStatusPedido?numeroDoPedido=xxxpto&idStatusPedido=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"Pedido",
+								"AtualizaStatusPedido"
+							],
+							"query": [
+								{
+									"key": "numeroDoPedido",
+									"value": "xxxpto"
+								},
+								{
+									"key": "idStatusPedido",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://localhost:1443",
+			"type": "string"
+		}
+	]
+}
