@@ -39,7 +39,8 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ProdutoDTO> Handle(AtualizaProdutoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await _produtoRepository.ObterPorId(request.Id);
+            var entidade = await _produtoRepository.ObterPorId(request.Id) ?? new Produto();
+
             await entidade.Atualizar(request.Id, request.CategoriaProdutoId, request.Nome, request.Descricao);
 
             Notificar(entidade.ValidationResult);

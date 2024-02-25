@@ -8,7 +8,7 @@ namespace Domain.Entities
 
         public Produto? Produto { get; private set; }
 
-        public async Task<CategoriaProduto> Cadastrar(string descricao)
+        public async Task<CategoriaProduto> Cadastrar(string? descricao)
         {
             Id = Guid.NewGuid();
             Descricao = descricao;
@@ -19,7 +19,7 @@ namespace Domain.Entities
             return this;
         }
 
-        public async Task<CategoriaProduto> Atualizar(Guid id, string descricao)
+        public async Task<CategoriaProduto> Atualizar(Guid id, string? descricao)
         {
             Id = id;
             Descricao = descricao;

@@ -8,7 +8,7 @@ namespace Domain.Entities
         public string? Nome { get; private set; }
         public string? Email { get; private set; }
 
-        public async Task<Cliente> Cadastrar(IClienteRepository clienteRepository, string nome, string email)
+        public async Task<Cliente> Cadastrar(IClienteRepository clienteRepository, string? nome, string? email)
         {
             Id = Guid.NewGuid();
             Nome = nome;
@@ -20,7 +20,7 @@ namespace Domain.Entities
             return this;
         }
 
-        public async Task<Cliente> Atualizar(IClienteRepository clienteRepository, Guid id, string nome, string email)
+        public async Task<Cliente> Atualizar(IClienteRepository clienteRepository, Guid id, string? nome, string? email)
         {
             Id = id;
             Nome = nome;

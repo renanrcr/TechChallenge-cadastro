@@ -10,7 +10,7 @@ namespace Domain.Entities
         public CategoriaProduto? CategoriaProduto { get; private set; }
         public TabelaPreco TabelaPreco { get; private set; } = new TabelaPreco();
 
-        public async Task<Produto> Cadastrar(Guid categoriaProdutoId, string nome, string descricao)
+        public async Task<Produto> Cadastrar(Guid categoriaProdutoId, string? nome, string? descricao)
         {
             Id = Guid.NewGuid();
             CategoriaProdutoId = categoriaProdutoId;
@@ -23,7 +23,7 @@ namespace Domain.Entities
             return this;
         }
 
-        public async Task<Produto> Atualizar(Guid id, Guid categoriaProdutoId, string nome, string descricao)
+        public async Task<Produto> Atualizar(Guid id, Guid categoriaProdutoId, string? nome, string? descricao)
         {
             Id = id;
             CategoriaProdutoId = categoriaProdutoId;
