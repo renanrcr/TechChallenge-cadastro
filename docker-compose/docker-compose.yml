@@ -17,7 +17,7 @@ services:
         DbServer: "sqlserver"
         DbPort: "1433"
         DbUser: "SA"
-        Password: "TechChallenge#Fase02"
+        Password: "TechChallenge#Lanchonete"
         Database: "lanchonete_cadastro"
     depends_on:
       - sqlserver
@@ -28,7 +28,7 @@ services:
     hostname: 'sqlserver'
     environment:
       ACCEPT_EULA: 'Y'
-      SA_PASSWORD: "TechChallenge#Fase02"
+      SA_PASSWORD: "TechChallenge#Lanchonete"
       MSSQL_PID: Express
     volumes:
       - c:/dados/volumes/mssql/data:/var/opt/mssql/data
