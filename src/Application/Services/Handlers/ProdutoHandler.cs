@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using TechChallenge.Api.DTOs;
-using TechChallenge.src.Core.Application.Services;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Commands.Produtos;
-using TechChallenge.src.Core.Domain.Entities;
+using Application.Services;
+using Domain.Adapters;
+using Domain.Entities;
+using Application.DTOs;
+using Application.Commands.Produtos;
 
 namespace TechChallenge.src.Handlers
 {
@@ -27,7 +27,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ProdutoDTO> Handle(CadastraProdutoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new Produto().Cadastrar(request);
+            var entidade = await new Produto().Cadastrar(request.CategoriaProdutoId, request.Nome, request.Descricao);
 
             Notificar(entidade.ValidationResult);
 
@@ -40,7 +40,7 @@ namespace TechChallenge.src.Handlers
         public async Task<ProdutoDTO> Handle(AtualizaProdutoCommand request, CancellationToken cancellationToken)
         {
             var entidade = await _produtoRepository.ObterPorId(request.Id);
-            await entidade.Atualizar(request);
+            await entidade.Atualizar(request.Id, request.CategoriaProdutoId, request.Nome, request.Descricao);
 
             Notificar(entidade.ValidationResult);
 
@@ -52,7 +52,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ProdutoDTO> Handle(DeletaProdutoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new Produto().Deletar(request);
+            var entidade = await new Produto().Deletar(request.Id);
 
             Notificar(entidade.ValidationResult);
 

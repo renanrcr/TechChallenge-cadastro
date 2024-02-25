@@ -1,6 +1,6 @@
 ﻿using TechChallenge.src.Adapters.Driven.Infra.DataContext;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Entities;
+using Domain.Adapters;
+using Domain.Entities;
 
 namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 {

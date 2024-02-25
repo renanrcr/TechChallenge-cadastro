@@ -1,8 +1,6 @@
-﻿using TechChallenge.src.Core.Application.Validations.TabelaPrecos;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Commands.TabelaPrecos;
+﻿using Domain.Validations.TabelaPrecos;
 
-namespace TechChallenge.src.Core.Domain.Entities
+namespace Domain.Entities
 {
     public class TabelaPreco : EntidadeBase<Guid>
     {
@@ -10,11 +8,11 @@ namespace TechChallenge.src.Core.Domain.Entities
         public decimal Preco { get; private set; }
         public Produto? Produto { get; private set; }
 
-        public async Task<TabelaPreco> Cadastrar(CadastraTabelaPrecoCommand command)
+        public async Task<TabelaPreco> Cadastrar(Guid produtoId, decimal preco)
         {
             Id = Guid.NewGuid();
-            ProdutoId = command.ProdutoId;
-            Preco = command.Preco;
+            ProdutoId = produtoId;
+            Preco = preco;
             DataCadastro = DateTime.Now;
 
             await Validate(this, new CadastraTabelaPrecoValidation());
@@ -22,11 +20,11 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<TabelaPreco> Atualizar(AtualizaTabelaPrecoCommand command)
+        public async Task<TabelaPreco> Atualizar(Guid id, Guid produtoId, decimal preco)
         {
-            Id = command.Id;
-            ProdutoId = command.ProdutoId;
-            Preco = command.Preco;
+            Id = id;
+            ProdutoId = produtoId;
+            Preco = preco;
             DataAtualizacao = DateTime.Now;
 
             await Validate(this, new AtualizaTabelaPrecoValidation());
@@ -34,9 +32,9 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<TabelaPreco> Deletar(DeletaTabelaPrecoCommand command)
+        public async Task<TabelaPreco> Deletar(Guid id)
         {
-            Id = command.Id;
+            Id = id;
             DataExclusao = DateTime.Now;
 
             await Validate(this, new DeletaTabelaPrecoValidation());

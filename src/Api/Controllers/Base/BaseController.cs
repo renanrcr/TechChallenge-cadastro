@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TechChallenge.src.Core.Domain.Adapters;
+using Domain.Adapters;
 
 namespace TechChallenge.Api.Controllers.Base
 {

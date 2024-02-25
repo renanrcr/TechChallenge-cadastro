@@ -2,9 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using TechChallenge.Api.Controllers.Base;
-using TechChallenge.Api.DTOs;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Commands.CategoriaProdutos;
+using Domain.Adapters;
+using Application.DTOs;
+using Application.Commands.CategoriaProdutos;
 
 namespace TechChallenge.Api.Controllers
 {

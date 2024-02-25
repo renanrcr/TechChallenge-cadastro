@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using TechChallenge.Api.DTOs;
-using TechChallenge.src.Core.Application.Services;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Commands.Clientes;
-using TechChallenge.src.Core.Domain.Entities;
+using Application.Services;
+using Domain.Adapters;
+using Domain.Entities;
+using Application.DTOs;
+using Application.Commands.Clientes;
 
 namespace TechChallenge.src.Handlers
 {
@@ -27,7 +27,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ClienteDTO> Handle(CadastraClienteCommand request, CancellationToken cancellationToken)
         {
-            Cliente entidade = await new Cliente().Cadastrar(_clienteRepository, request);
+            Cliente entidade = await new Cliente().Cadastrar(_clienteRepository, request.Nome, request.Email);
 
             Notificar(entidade.ValidationResult);
 
@@ -39,7 +39,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ClienteDTO> Handle(AtualizaClienteCommand request, CancellationToken cancellationToken)
         {
-            Cliente entidade = await new Cliente().Atualizar(_clienteRepository, request);
+            Cliente entidade = await new Cliente().Atualizar(_clienteRepository, request.Id, request.Nome, request.Email);
 
             Notificar(entidade.ValidationResult);
 
@@ -51,7 +51,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ClienteDTO> Handle(DeletaClienteCommand request, CancellationToken cancellationToken)
         {
-            Cliente entidade = await new Cliente().Deletar(_clienteRepository, request);
+            Cliente entidade = await new Cliente().Deletar(_clienteRepository, request.Id);
 
             Notificar(entidade.ValidationResult);
 

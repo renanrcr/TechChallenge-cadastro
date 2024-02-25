@@ -1,6 +1,6 @@
-﻿using TechChallenge.src.Core.Application.Notificacoes;
+﻿using Domain.Notificacoes;
 
-namespace TechChallenge.src.Core.Domain.Adapters
+namespace Domain.Adapters
 {
     public interface INotificador
     {

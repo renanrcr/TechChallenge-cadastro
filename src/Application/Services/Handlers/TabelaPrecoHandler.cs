@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Commands.TabelaPrecos;
-using TechChallenge.src.Core.Domain.Entities;
+using Domain.Adapters;
+using Domain.Entities;
+using Application.Commands.TabelaPrecos;
 
 namespace TechChallenge.src.Handlers
 {
@@ -18,7 +18,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<TabelaPreco> Handle(CadastraTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new TabelaPreco().Cadastrar(request);
+            var entidade = await new TabelaPreco().Cadastrar(request.ProdutoId, request.Preco);
 
             if (entidade.IsValid)
                 await _tabelaPrecoRepository.Adicionar(entidade);
@@ -28,7 +28,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<TabelaPreco> Handle(AtualizaTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new TabelaPreco().Atualizar(request);
+            var entidade = await new TabelaPreco().Atualizar(request.Id, request.ProdutoId, request.Preco);
 
             if (entidade.IsValid)
                 await _tabelaPrecoRepository.Atualizar(entidade);
@@ -38,7 +38,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<TabelaPreco> Handle(DeletaTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new TabelaPreco().Deletar(request);
+            var entidade = await new TabelaPreco().Deletar(request.Id);
 
             if (entidade.IsValid)
                 await _tabelaPrecoRepository.Atualizar(entidade);

@@ -1,19 +1,18 @@
-﻿using TechChallenge.src.Core.Application.Validations.Clientes;
-using TechChallenge.src.Core.Domain.Adapters;
-using TechChallenge.src.Core.Domain.Commands.Clientes;
+﻿using Domain.Adapters;
+using Domain.Validations.Clientes;
 
-namespace TechChallenge.src.Core.Domain.Entities
+namespace Domain.Entities
 {
     public class Cliente : EntidadeBase<Guid>
     {
         public string? Nome { get; private set; }
         public string? Email { get; private set; }
 
-        public async Task<Cliente> Cadastrar(IClienteRepository clienteRepository, CadastraClienteCommand command)
+        public async Task<Cliente> Cadastrar(IClienteRepository clienteRepository, string nome, string email)
         {
             Id = Guid.NewGuid();
-            Nome = command.Nome;
-            Email = command.Email;
+            Nome = nome;
+            Email = email;
             DataCadastro = DateTime.Now;
 
             await Validate(this, new CadastraClienteValidation(clienteRepository));
@@ -21,11 +20,11 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<Cliente> Atualizar(IClienteRepository clienteRepository, AtualizaClienteCommand command)
+        public async Task<Cliente> Atualizar(IClienteRepository clienteRepository, Guid id, string nome, string email)
         {
-            Id = command.Id;
-            Nome = command.Nome;
-            Email = command.Email;
+            Id = id;
+            Nome = nome;
+            Email = email;
             DataAtualizacao = DateTime.Now;
 
             await Validate(this, new AtualizaClienteValidation(clienteRepository));
@@ -33,9 +32,9 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<Cliente> Deletar(IClienteRepository clienteRepository, DeletaClienteCommand command)
+        public async Task<Cliente> Deletar(IClienteRepository clienteRepository, Guid id)
         {
-            Id = command.Id;
+            Id = id;
             DataExclusao = DateTime.Now;
 
             await Validate(this, new DeletaClienteValidation(clienteRepository));

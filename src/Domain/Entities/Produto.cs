@@ -1,7 +1,6 @@
-﻿using TechChallenge.src.Core.Application.Validations.Produtos;
-using TechChallenge.src.Core.Domain.Commands.Produtos;
+﻿using Domain.Validations.Produtos;
 
-namespace TechChallenge.src.Core.Domain.Entities
+namespace Domain.Entities
 {
     public class Produto : EntidadeBase<Guid>
     {
@@ -11,12 +10,12 @@ namespace TechChallenge.src.Core.Domain.Entities
         public CategoriaProduto? CategoriaProduto { get; private set; }
         public TabelaPreco TabelaPreco { get; private set; } = new TabelaPreco();
 
-        public async Task<Produto> Cadastrar(CadastraProdutoCommand command)
+        public async Task<Produto> Cadastrar(Guid categoriaProdutoId, string nome, string descricao)
         {
             Id = Guid.NewGuid();
-            CategoriaProdutoId = command.CategoriaProdutoId;
-            Nome = command.Nome;
-            Descricao = command.Descricao;
+            CategoriaProdutoId = categoriaProdutoId;
+            Nome = nome;
+            Descricao = descricao;
             DataCadastro = DateTime.Now;
 
             await Validate(this, new CadastraProdutoValidation());
@@ -24,12 +23,12 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<Produto> Atualizar(AtualizaProdutoCommand command)
+        public async Task<Produto> Atualizar(Guid id, Guid categoriaProdutoId, string nome, string descricao)
         {
-            Id = command.Id;
-            CategoriaProdutoId = command.CategoriaProdutoId;
-            Nome = command.Nome;
-            Descricao = command.Descricao;
+            Id = id;
+            CategoriaProdutoId = categoriaProdutoId;
+            Nome = nome;
+            Descricao = descricao;
             DataAtualizacao = DateTime.Now;
 
             await Validate(this, new AtualizaProdutoValidation());
@@ -37,9 +36,9 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<Produto> Deletar(DeletaProdutoCommand command)
+        public async Task<Produto> Deletar(Guid id)
         {
-            Id = command.Id;
+            Id = id;
             DataExclusao = DateTime.Now;
 
             await Validate(this, new DeletaProdutoValidation());

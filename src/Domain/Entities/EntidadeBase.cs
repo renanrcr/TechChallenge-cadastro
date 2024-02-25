@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TechChallenge.src.Core.Domain.Entities
+namespace Domain.Entities
 {
     public abstract class EntidadeBase<TId>
     {

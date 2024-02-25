@@ -1,3 +1,4 @@
+using Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using TechChallenge.Api.Configuration;

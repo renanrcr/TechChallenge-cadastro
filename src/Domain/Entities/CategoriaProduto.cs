@@ -1,7 +1,6 @@
-﻿using TechChallenge.src.Core.Application.Validations.CategoriaProdutos;
-using TechChallenge.src.Core.Domain.Commands.CategoriaProdutos;
+﻿using Domain.Validations.CategoriaProdutos;
 
-namespace TechChallenge.src.Core.Domain.Entities
+namespace Domain.Entities
 {
     public class CategoriaProduto : EntidadeBase<Guid>
     {
@@ -9,10 +8,10 @@ namespace TechChallenge.src.Core.Domain.Entities
 
         public Produto? Produto { get; private set; }
 
-        public async Task<CategoriaProduto> Cadastrar(CadastraCategoriaProdutoCommand command)
+        public async Task<CategoriaProduto> Cadastrar(string descricao)
         {
             Id = Guid.NewGuid();
-            Descricao = command.Descricao;
+            Descricao = descricao;
             DataCadastro = DateTime.Now;
 
             await Validate(this, new CadastraCategoriaProdutoValidation());
@@ -20,10 +19,10 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<CategoriaProduto> Atualizar(AtualizaCategoriaProdutoCommand command)
+        public async Task<CategoriaProduto> Atualizar(Guid id, string descricao)
         {
-            Id = command.Id;
-            Descricao = command.Descricao;
+            Id = id;
+            Descricao = descricao;
             DataAtualizacao = DateTime.Now;
 
             await Validate(this, new AtualizaCategoriaProdutoValidation());
@@ -31,9 +30,9 @@ namespace TechChallenge.src.Core.Domain.Entities
             return this;
         }
 
-        public async Task<CategoriaProduto> Deletar(DeletaCategoriaProdutoCommand command)
+        public async Task<CategoriaProduto> Deletar(Guid id)
         {
-            Id = command.Id;
+            Id = id;
             DataExclusao = DateTime.Now;
 
             await Validate(this, new DeletaCategoriaProdutoValidation());

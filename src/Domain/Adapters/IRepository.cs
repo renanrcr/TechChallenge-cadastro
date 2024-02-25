@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using TechChallenge.src.Core.Domain.Entities;
+using Domain.Entities;
 
-namespace TechChallenge.src.Core.Domain.Adapters
+namespace Domain.Adapters
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : EntidadeBase<Guid>
     {

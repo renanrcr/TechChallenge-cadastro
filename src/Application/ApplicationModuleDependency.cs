@@ -1,5 +1,6 @@
-﻿using TechChallenge.src.Core.Application.Notificacoes;
-using TechChallenge.src.Core.Domain.Adapters;
+﻿using Domain.Adapters;
+using Domain.Notificacoes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TechChallenge.src.Adapters.Driven.Infra
 {

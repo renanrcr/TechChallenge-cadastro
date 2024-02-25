@@ -7,9 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Validations\Clientes\Controllers\**" />
-    <EmbeddedResource Remove="Validations\Clientes\Controllers\**" />
-    <None Remove="Validations\Clientes\Controllers\**" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

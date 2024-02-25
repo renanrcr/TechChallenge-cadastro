@@ -1,8 +1,8 @@
 ﻿using FluentValidation.Results;
-using TechChallenge.src.Core.Application.Notificacoes;
-using TechChallenge.src.Core.Domain.Adapters;
+using Domain.Adapters;
+using Domain.Notificacoes;
 
-namespace TechChallenge.src.Core.Application.Services
+namespace Application.Services
 {
     public class BaseService
     {

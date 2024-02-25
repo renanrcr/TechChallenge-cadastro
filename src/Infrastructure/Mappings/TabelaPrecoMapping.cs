@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using TechChallenge.src.Core.Domain.Entities;
+using Domain.Entities;
 using System.Reflection.Emit;
 
 namespace TechChallenge.src.Adapters.Driven.Infra.Mappings
