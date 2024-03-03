@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app
+  name: deployment.app
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+      namespace: default
+    spec:
+      containers:
+      - name: lanchonete-app
+        image: renanrcr/techchallenge:dev
+        command: [ "sh", "-c", "sleep 1h" ]
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 443
+          name: app
+          protocol: TCP
+        env:
+        - name: DbServer
+          value: sqlserver
+        - name: DbPort
+          value: '1433'
+        - name: DbUser
+          value: SA
+        - name: Password
+          value: TechChallenge#Fase01
+        - name: Database
+          value: Lanchonete
+      terminationGracePeriodSeconds: 0      

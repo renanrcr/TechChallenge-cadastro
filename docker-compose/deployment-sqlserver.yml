@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sqlserver
+  name: deployment.sqlserver
+  namespace: default
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: sqlserver
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+      namespace: default
+    spec:
+      containers:
+      - name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        command: [ "sh", "-c", "sleep 1h" ]
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 1433
+          name: sqlserver
+          protocol: TCP
+        env:
+        - name: ACCEPT_EULAs
+          value: 'Y'
+        - name: MSSQL_SA_PASSWORD
+          value: TechChallenge#Fase01
+        - name: MSSQL_PID
+          value: Express
+        volumeMounts:
+        - name: persistent-volume-data-storage
+          mountPath: dados/volumes/mssql/data
+        - name: persistent-volume-log-storage
+          mountPath: dados/volumes/mssql/log
+        - name: persistent-volume-secrets-storage
+          mountPath: dados/volumes/mssql/secrets
+      terminationGracePeriodSeconds: 0
+      hostname: sqlserver
+      volumes:
+      - name: persistent-volume-data-storage
+        persistentVolumeClaim:
+          claimName: persistent-volume-claim-data
+      - name: persistent-volume-log-storage
+        persistentVolumeClaim:
+          claimName: persistent-volume-claim-log
+      - name: persistent-volume-secrets-storage
+        persistentVolumeClaim:
+          claimName: persistent-volume-claim-secrets
