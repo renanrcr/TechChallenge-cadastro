@@ -6,7 +6,7 @@ services:
     container_name: lanchonete-app
     build:
       context: ../
-      dockerfile: src/Dockerfile
+      dockerfile: src/API/Dockerfile
     networks:
       - techchallenge-bridge
     ports:
