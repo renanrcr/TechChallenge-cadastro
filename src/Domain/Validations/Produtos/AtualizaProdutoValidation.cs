@@ -7,6 +7,8 @@ namespace Domain.Validations.Produtos
         public AtualizaProdutoValidation()
         {
             ValidarDataAtualizacao();
+            ValidarNome();
+            ValidarDescricao();
         }
     }
 }

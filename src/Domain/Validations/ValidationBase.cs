@@ -36,5 +36,10 @@ namespace Domain.Validations
                 .LessThanOrEqualTo(DateTime.MaxValue)
                 .WithMessage("Informe uma Data de Exclusão válida.");
         }
+
+        public async Task<bool> ValidarStringNulOuVazia(string? valor, CancellationToken token)
+        {
+            return await Task.FromResult(!string.IsNullOrWhiteSpace(valor));
+        }
     }
 }

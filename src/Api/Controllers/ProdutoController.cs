@@ -54,7 +54,7 @@ namespace TechChallenge.Api.Controllers
             return Ok(_mapper.Map<IEnumerable<ProdutoDTO>>(await _produtoRepository.Buscar(x => x.CategoriaProdutoId == categoriaId)));
         }
 
-        [HttpPost("produtos")]
+        [HttpPost("produto")]
         [SwaggerOperation(Summary = "Cadastrar o produto", Description = "Cadastra o produto.")]
         public async Task<IActionResult?> Post([FromBody] CadastraProdutoCommand command)
         {
@@ -67,7 +67,7 @@ namespace TechChallenge.Api.Controllers
             return Ok(entidade);
         }
 
-        [HttpPut("produtos")]
+        [HttpPut("produto")]
         [SwaggerOperation(Summary = "Atualizar o produto", Description = "Atualiza os dados do produto cadastrado.")]
         public async Task<IActionResult?> Put([FromBody] AtualizaProdutoCommand command)
         {
@@ -80,9 +80,9 @@ namespace TechChallenge.Api.Controllers
             return Ok(entidade);
         }
 
-        [HttpDelete("produtos")]
+        [HttpDelete("produto")]
         [SwaggerOperation(Summary = "Deletar o produto", Description = "Deleta o produto informado.")]
-        public async Task<IActionResult?> Delete([FromRoute] DeletaProdutoCommand command)
+        public async Task<IActionResult?> Delete(DeletaProdutoCommand command)
         {
             if (!ModelState.IsValid) return null;
 

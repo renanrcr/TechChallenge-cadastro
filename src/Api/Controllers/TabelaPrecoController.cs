@@ -4,46 +4,46 @@ using Microsoft.AspNetCore.Mvc;
 using TechChallenge.Api.Controllers.Base;
 using Domain.Adapters;
 using Application.DTOs;
-using Application.Commands.Clientes;
 using Swashbuckle.AspNetCore.Annotations;
+using Application.Commands.TabelaPrecos;
 
 namespace TechChallenge.Api.Controllers
 {
-    [Route("Cadastro")]
-    [SwaggerTag("Cliente - endpoint responsável pela consulta e cadastro dos clientes.")]
-    [SwaggerResponse(200, "Sucesso na requisição.", typeof(IEnumerable<ClienteDTO>))]
+    [Route("TabelaPreco")]
+    [SwaggerTag("Tabela de Preço - endpoint responsável pela consulta e cadastro dos preços dos produtos.")]
+    [SwaggerResponse(200, "Sucesso na requisição.", typeof(IEnumerable<TabelaPrecoDTO>))]
     [SwaggerResponse(404, "Não encontrou nenhum registro para a requisição.")]
     [SwaggerResponse(400, "Não pode processar a requisição.")]
     [SwaggerResponse(500, "Erro na requisição.")]
-    public class ClienteController : BaseController
+    public class TabelaPrecoController : BaseController
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly IClienteRepository _clienteRepository;
+        private readonly ITabelaPrecoRepository _tabelaPrecoRepository;
 
-        public ClienteController(INotificador notificador,
+        public TabelaPrecoController(INotificador notificador,
             IMediator mediator,
             IMapper mapper,
-            IClienteRepository clienteRepository)
+            ITabelaPrecoRepository tabelaPrecoRepository)
             : base(notificador)
         {
             _mediator = mediator;
             _mapper = mapper;
-            _clienteRepository = clienteRepository;
+            _tabelaPrecoRepository = tabelaPrecoRepository;
         }
 
-        [HttpGet("clientes")]
-        [SwaggerOperation(Summary = "Clientes", Description = "Retorna todos os clientes cadastrados.")]
+        [HttpGet("precos")]
+        [SwaggerOperation(Summary = "Preço dos Produtos", Description = "Retorna todos os preço cadastrados.")]
         public async Task<IActionResult?> Get()
         {
             if (!ModelState.IsValid) return null;
 
-            return Ok(_mapper.Map<IEnumerable<ClienteDTO>>(await _clienteRepository.ObterTodos()));
+            return Ok(_mapper.Map<IEnumerable<TabelaPrecoDTO>>(await _tabelaPrecoRepository.ObterTodos()));
         }
 
-        [HttpPost("clientes")]
-        [SwaggerOperation(Summary = "Cadastrar clientes", Description = "Cadastra o cliente.")]
-        public async Task<IActionResult?> Post([FromBody] CadastraClienteCommand command)
+        [HttpPost("preco")]
+        [SwaggerOperation(Summary = "Cadastrar preço", Description = "Cadastra o preço do produto.")]
+        public async Task<IActionResult?> Post([FromBody] CadastraTabelaPrecoCommand command)
         {
             if (!ModelState.IsValid) return null;
 
@@ -54,9 +54,9 @@ namespace TechChallenge.Api.Controllers
             return Ok(entidade);
         }
 
-        [HttpPut("clientes")]
-        [SwaggerOperation(Summary = "Atualizar clientes", Description = "Atualiza os dados do cliente cadastrado.")]
-        public async Task<IActionResult?> Put([FromBody] AtualizaClienteCommand command)
+        [HttpPut("preco")]
+        [SwaggerOperation(Summary = "Atualizar preço", Description = "Atualiza os preço do produto cadastrado.")]
+        public async Task<IActionResult?> Put([FromBody] AtualizaTabelaPrecoCommand command)
         {
             if (!ModelState.IsValid) return null;
 
@@ -67,9 +67,9 @@ namespace TechChallenge.Api.Controllers
             return Ok(entidade);
         }
 
-        [HttpDelete("clientes")]
-        [SwaggerOperation(Summary = "Deletar clientes", Description = "Deleta o cliente informado.")]
-        public async Task<IActionResult?> Delete(DeletaClienteCommand command)
+        [HttpDelete("preco")]
+        [SwaggerOperation(Summary = "Deletar preço", Description = "Deleta o preço informado.")]
+        public async Task<IActionResult?> Delete(DeletaTabelaPrecoCommand command)
         {
             if (!ModelState.IsValid) return null;
 

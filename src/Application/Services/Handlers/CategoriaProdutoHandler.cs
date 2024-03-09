@@ -27,7 +27,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<CategoriaProdutoDTO> Handle(CadastraCategoriaProdutoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new CategoriaProduto().Cadastrar(request.Descricao);
+            var entidade = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, request.Descricao);
 
             Notificar(entidade.ValidationResult);
 
@@ -39,7 +39,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<CategoriaProdutoDTO> Handle(AtualizaCategoriaProdutoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new CategoriaProduto().Atualizar(request.Id, request.Descricao);
+            var entidade = await new CategoriaProduto().Atualizar(_categoriaProdutoRepository, request.Id, request.Descricao);
 
             Notificar(entidade.ValidationResult);
 
@@ -51,7 +51,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<CategoriaProdutoDTO> Handle(DeletaCategoriaProdutoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new CategoriaProduto().Deletar(request.Id);
+            var entidade = await new CategoriaProduto().Deletar(_categoriaProdutoRepository, request.Id);
 
             Notificar(entidade.ValidationResult);
 

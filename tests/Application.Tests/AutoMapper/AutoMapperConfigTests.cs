@@ -4,6 +4,7 @@ using AutoMapper;
 using Domain.Adapters;
 using Domain.Entities;
 using Infrastructure.Tests.Adapters;
+using TechChallenge.src.Adapters.Driven.Infra.Repositories;
 
 namespace Application.Tests.AutoMapper
 {
@@ -12,6 +13,7 @@ namespace Application.Tests.AutoMapper
         private readonly IMapper _mapper;
         private readonly IProdutoRepository _produtoRepository;
         private readonly IClienteRepository _clienteRepository;
+        private readonly ICategoriaProdutoRepository _categoriaProdutoRepository;
 
         public AutoMapperConfigTests()
         {
@@ -19,13 +21,14 @@ namespace Application.Tests.AutoMapper
             _mapper = config.CreateMapper();
             _produtoRepository = IProdutoRepositoryMock.GetMock();
             _clienteRepository = IClienteRepositoryMock.GetMock();
+            _categoriaProdutoRepository = ICategoriaProdutoRepositoryMock.GetMock();
         }
 
         [Fact]
         public async Task MapearProdutoParaProdutoDto_DeveRetornarVerdadeiro()
         {
             // Arrange
-            var categoria = await new CategoriaProduto().Cadastrar("Categoria Lanche");
+            var categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
             Produto? produto = await new Produto().Cadastrar(categoria.Id, "Lanche", "Cadastro do primeiro Lanche");
 
             // Act
@@ -52,7 +55,7 @@ namespace Application.Tests.AutoMapper
         public async Task MapearCategoriaProdutoParaCategoriaProdutoDto_DeveRetornarVerdadeiro()
         {
             // Arrange
-            CategoriaProduto? categoria = await new CategoriaProduto().Cadastrar("Categoria Lanche");
+            CategoriaProduto? categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
 
             // Act
             CategoriaProdutoDTO categoriaProdutoDTO = _mapper.Map<CategoriaProdutoDTO>(categoria);

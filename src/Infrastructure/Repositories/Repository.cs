@@ -19,7 +19,7 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
-            return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
+            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(predicate).ToListAsync();
         }
 
         public async Task<bool> Existe(Expression<Func<TEntity, bool>> predicate)
@@ -29,12 +29,12 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public virtual async Task<TEntity?> ObterPorId(Guid id)
         {
-            return await DbSet.FindAsync(id);
+            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
         public virtual async Task<List<TEntity>> ObterTodos()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).ToListAsync();
         }
 
         public virtual async Task Adicionar(TEntity entity)

@@ -17,7 +17,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task CategoriaProduto_DeveRetornarVerdadeiro_QuandoCriarNovo()
         {
             //Arrange
-            var novoDado = await new CategoriaProduto().Cadastrar("Categoria Lanche");
+            var novoDado = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
 
             //Act
             await _categoriaProdutoRepository.Adicionar(novoDado);
@@ -35,7 +35,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task CategoriaProduto_DeveRetornarVerdadeiro_QuandoAtualizar()
         {
             //Arrange
-            var novoDado = await new CategoriaProduto().Cadastrar("Categoria Lanche");
+            var novoDado = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
             await _categoriaProdutoRepository.Adicionar(novoDado);
 
             Guid id = (_categoriaProdutoRepository.ObterTodos().Result.FirstOrDefault() ?? new()).Id;
@@ -57,7 +57,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task CategoriaProduto_DeveRetornarVerdadeiro_QuandoTiverTodosAsIndentificacoes()
         {
             //Arrange
-            var novoDado = await new CategoriaProduto().Cadastrar("Categoria Lanche");
+            var novoDado = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
             await _categoriaProdutoRepository.Adicionar(novoDado);
 
             //Act
@@ -75,7 +75,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task CategoriaProduto_DeveRetornarVerdadeiro_QuandoEncontrarPeloID()
         {
             //Arrange
-            var novoDado = await new CategoriaProduto().Cadastrar("Categoria Lanche");
+            var novoDado = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
             await _categoriaProdutoRepository.Adicionar(novoDado);
             Guid id = ((await _categoriaProdutoRepository.ObterTodos()).FirstOrDefault() ?? new()).Id;
 
