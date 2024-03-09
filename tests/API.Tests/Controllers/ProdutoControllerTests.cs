@@ -1,9 +1,11 @@
 ﻿using Application.AutoMapper;
 using Application.Commands.Produtos;
+using Application.DTOs;
 using AutoMapper;
 using Domain.Adapters;
 using Infrastructure.Tests.Adapters;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using TechChallenge.Api.Controllers;
 
@@ -50,7 +52,7 @@ namespace API.Tests.Controllers
         }
 
         [Fact]
-        public void Pedido_DeveRetornarVerdadeiro_QuandoCriarPedido()
+        public void Produto_DeveRetornarVerdadeiro_QuandoCriarProduto()
         {
             //Arrange
             var command = new CadastraProdutoCommand()
@@ -62,6 +64,30 @@ namespace API.Tests.Controllers
 
             //Act
             var result = _produtoController.Post(command).Result;
+
+            //Assert
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Produto_DeveRetornarVerdadeiro_QuandoDeletarProduto()
+        {
+            //Arrange
+            var commandCadastrar = new CadastraProdutoCommand()
+            {
+                CategoriaProdutoId = Guid.NewGuid(),
+                Nome = "Lanche",
+                Descricao = "Cadastro do primeiro Lanche",
+            };
+            var resultPost = _produtoController.Post(commandCadastrar).Result;
+
+            var objectResult = Assert.IsType<OkObjectResult>(resultPost);
+            var produtoRetornado = Assert.IsType<ProdutoDTO>(objectResult.Value);
+
+            var command = new DeletaProdutoCommand() { Id = produtoRetornado.Id, };
+
+            //Act
+            var result = _produtoController.Delete(command).Result;
 
             //Assert
             Assert.NotNull(result);

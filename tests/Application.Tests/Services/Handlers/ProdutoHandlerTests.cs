@@ -72,7 +72,7 @@ namespace Application.Tests.Services.Handlers
         }
 
         [Fact]
-        public void Pedido_DeveRetornarVerdadeiro_QuandoRemover()
+        public void Produto_DeveRetornarVerdadeiro_QuandoRemover()
         {
             //Arrange
             var commandCadastrar = new CadastraProdutoCommand()
