@@ -1,10 +1,12 @@
 ﻿using Application.AutoMapper;
+using Application.Commands.Clientes;
 using Application.Commands.Produtos;
 using Application.DTOs;
 using AutoMapper;
 using Domain.Adapters;
 using Infrastructure.Tests.Adapters;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using TechChallenge.Api.Controllers;
@@ -32,7 +34,7 @@ namespace API.Tests.Controllers
         }
 
         [Fact]
-        public void Produto_DeveRetornarVerdadeiro_ListarProdutos()
+        public async void Produto_DeveRetornarVerdadeiro_ListarProdutos()
         {
             //Arrange
             var command = new CadastraProdutoCommand()
@@ -41,10 +43,19 @@ namespace API.Tests.Controllers
                 Nome = "Lanche",
                 Descricao = "Cadastro do primeiro Lanche",
             };
-            var resultPost = _produtoController.Post(command).Result;
+
+            _mediatorMock.Setup(x => x.Send(It.IsAny<CadastraProdutoCommand>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(new ProdutoDTO
+               {
+                   Id = Guid.NewGuid(),
+                   Nome = command.Nome,
+                   Descricao = command.Descricao,
+               });
+
+            var resultPost = await _produtoController.Post(command);
 
             //Act
-            var result = _produtoController.Get().Result;
+            var result = await _produtoController.Get();
 
             //Assert
             Assert.NotNull(resultPost);
@@ -52,7 +63,7 @@ namespace API.Tests.Controllers
         }
 
         [Fact]
-        public void Produto_DeveRetornarVerdadeiro_QuandoCriarProduto()
+        public async void Produto_DeveRetornarVerdadeiro_QuandoCriarProduto()
         {
             //Arrange
             var command = new CadastraProdutoCommand()
@@ -62,15 +73,23 @@ namespace API.Tests.Controllers
                 Descricao = "Cadastro do primeiro Lanche",
             };
 
+            _mediatorMock.Setup(x => x.Send(It.IsAny<CadastraProdutoCommand>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(new ProdutoDTO
+               {
+                   Id = Guid.NewGuid(),
+                   Nome = command.Nome,
+                   Descricao = command.Descricao,
+               });
+
             //Act
-            var result = _produtoController.Post(command).Result;
+            var result = await _produtoController.Post(command);
 
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void Produto_DeveRetornarVerdadeiro_QuandoDeletarProduto()
+        public async void Produto_DeveRetornarVerdadeiro_QuandoDeletarProduto()
         {
             //Arrange
             var commandCadastrar = new CadastraProdutoCommand()
@@ -79,7 +98,23 @@ namespace API.Tests.Controllers
                 Nome = "Lanche",
                 Descricao = "Cadastro do primeiro Lanche",
             };
-            var resultPost = _produtoController.Post(commandCadastrar).Result;
+
+            _mediatorMock.Setup(x => x.Send(It.IsAny<CadastraProdutoCommand>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(new ProdutoDTO
+               {
+                   Id = Guid.NewGuid(),
+                   Nome = commandCadastrar.Nome,
+                   Descricao = commandCadastrar.Descricao,
+               });
+            _mediatorMock.Setup(x => x.Send(It.IsAny<DeletaProdutoCommand>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(new ProdutoDTO
+                {
+                    Id = Guid.NewGuid(),
+                    Nome = commandCadastrar.Nome,
+                    Descricao = commandCadastrar.Descricao,
+                });
+
+            var resultPost = await _produtoController.Post(commandCadastrar);
 
             var objectResult = Assert.IsType<OkObjectResult>(resultPost);
             var produtoRetornado = Assert.IsType<ProdutoDTO>(objectResult.Value);
@@ -87,7 +122,7 @@ namespace API.Tests.Controllers
             var command = new DeletaProdutoCommand() { Id = produtoRetornado.Id, };
 
             //Act
-            var result = _produtoController.Delete(command).Result;
+            var result = await _produtoController.Delete(command);
 
             //Assert
             Assert.NotNull(result);
