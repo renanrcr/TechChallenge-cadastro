@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Domain.Adapters;
 using Domain.Entities;
-using Domain.Validations;
 
 namespace Domain.Validations.Clientes.Base
 {
@@ -18,7 +17,7 @@ namespace Domain.Validations.Clientes.Base
 
         public void ValidarNome()
         {
-            RuleFor(x => x.Nome).NotNull().NotEmpty().WithMessage("Informe um nome.");
+            RuleFor(x => x.Nome).Null().Empty().WithMessage("Informe um nome.");
         }
 
         public void ValidarEmail()

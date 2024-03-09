@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Domain.Entities;
-using Domain.Validations;
 
 namespace Domain.Validations.Produtos.Base
 {
@@ -9,16 +8,18 @@ namespace Domain.Validations.Produtos.Base
         public ProdutoBaseValidation()
         {
             ValidarId();
+            ValidarNome();
+            ValidarDescricao();
         }
 
         public void ValidarNome()
         {
-            RuleFor(x => x.Nome).NotNull().NotEmpty().WithMessage("Informe um nome.");
+            RuleFor(x => x.Nome).Null().Empty().WithMessage("Informe um nome.");
         }
 
         public void ValidarDescricao()
         {
-            RuleFor(x => x.Descricao).NotNull().NotEmpty().WithMessage("Informe uma descrição.");
+            RuleFor(x => x.Descricao).Null().Empty().WithMessage("Informe uma descrição.");
         }
     }
 }

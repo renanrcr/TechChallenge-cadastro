@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Domain.Entities;
-using Domain.Validations;
 
 namespace Domain.Validations.CategoriaProdutos.Base
 {
@@ -13,7 +12,7 @@ namespace Domain.Validations.CategoriaProdutos.Base
 
         public void ValidarDescricao()
         {
-            RuleFor(x => x.Descricao).NotNull().NotEmpty().WithMessage("Informe uma descrição da categoria.");
+            RuleFor(x => x.Descricao).Null().Empty().WithMessage("Informe uma descrição da categoria.");
         }
     }
 }
