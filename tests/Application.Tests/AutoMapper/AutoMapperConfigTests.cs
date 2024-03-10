@@ -4,7 +4,6 @@ using AutoMapper;
 using Domain.Adapters;
 using Domain.Entities;
 using Infrastructure.Tests.Adapters;
-using TechChallenge.src.Adapters.Driven.Infra.Repositories;
 
 namespace Application.Tests.AutoMapper
 {
@@ -62,6 +61,19 @@ namespace Application.Tests.AutoMapper
 
             // Assert
             Assert.Equal(categoria.Descricao, categoriaProdutoDTO.Descricao);
+        }
+
+        [Fact]
+        public async Task MapearTabelaPrecoParaTabelaPrecoDto_DeveRetornarVerdadeiro()
+        {
+            // Arrange
+            TabelaPreco? tabelaPreco = await new TabelaPreco().Cadastrar(Guid.NewGuid(), 22m);
+
+            // Act
+            TabelaPrecoDTO tabelaPrecoDTO = _mapper.Map<TabelaPrecoDTO>(tabelaPreco);
+
+            // Assert
+            Assert.Equal(tabelaPreco.Preco, tabelaPrecoDTO.Preco);
         }
     }
 }

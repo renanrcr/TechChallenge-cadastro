@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Domain.Entities;
+using Application.DTOs;
 
 namespace Application.Commands.TabelaPrecos
 {
-    public class AtualizaTabelaPrecoCommand : IRequest<TabelaPreco>
+    public class AtualizaTabelaPrecoCommand : IRequest<TabelaPrecoDTO>
     {
         public Guid Id { get; set; }
         public Guid ProdutoId { get; set; }

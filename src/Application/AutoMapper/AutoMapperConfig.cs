@@ -11,6 +11,7 @@ namespace Application.AutoMapper
             CreateMap<ClienteDTO, Cliente>().ReverseMap();
             CreateMap<CategoriaProdutoDTO, CategoriaProduto>().ReverseMap();
             CreateMap<ProdutoDTO, Produto>().ReverseMap();
+            CreateMap<TabelaPrecoDTO, TabelaPreco>().ReverseMap();
         }
     }
 }

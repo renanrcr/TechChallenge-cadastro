@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Domain.Entities;
+using Application.DTOs;
 
 namespace Application.Commands.TabelaPrecos
 {
-    public class DeletaTabelaPrecoCommand : IRequest<TabelaPreco>
+    public class DeletaTabelaPrecoCommand : IRequest<TabelaPrecoDTO>
     {
         public Guid Id { get; set; }
     }

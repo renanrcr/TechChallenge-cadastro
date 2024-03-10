@@ -1,12 +1,10 @@
 ﻿using Application.AutoMapper;
-using Application.Commands.Clientes;
 using Application.Commands.Produtos;
 using Application.DTOs;
 using AutoMapper;
 using Domain.Adapters;
 using Infrastructure.Tests.Adapters;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using TechChallenge.Api.Controllers;

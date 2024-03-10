@@ -2,48 +2,53 @@
 using Domain.Adapters;
 using Domain.Entities;
 using Application.Commands.TabelaPrecos;
+using Application.DTOs;
+using AutoMapper;
 
 namespace TechChallenge.src.Handlers
 {
-    public class TabelaPrecoHandler : IRequestHandler<CadastraTabelaPrecoCommand, TabelaPreco>,
-        IRequestHandler<AtualizaTabelaPrecoCommand, TabelaPreco>,
-        IRequestHandler<DeletaTabelaPrecoCommand, TabelaPreco>
+    public class TabelaPrecoHandler : IRequestHandler<CadastraTabelaPrecoCommand, TabelaPrecoDTO>,
+        IRequestHandler<AtualizaTabelaPrecoCommand, TabelaPrecoDTO>,
+        IRequestHandler<DeletaTabelaPrecoCommand, TabelaPrecoDTO>
     {
         private readonly ITabelaPrecoRepository _tabelaPrecoRepository;
+        private readonly IMapper _mapper;
 
-        public TabelaPrecoHandler(ITabelaPrecoRepository tabelaPrecoRepository)
+        public TabelaPrecoHandler(ITabelaPrecoRepository tabelaPrecoRepository,
+            IMapper mapper)
         {
             _tabelaPrecoRepository = tabelaPrecoRepository;
+            _mapper = mapper;
         }
 
-        public async Task<TabelaPreco> Handle(CadastraTabelaPrecoCommand request, CancellationToken cancellationToken)
+        public async Task<TabelaPrecoDTO> Handle(CadastraTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
             var entidade = await new TabelaPreco().Cadastrar(request.ProdutoId, request.Preco);
 
             if (entidade.IsValid)
                 await _tabelaPrecoRepository.Adicionar(entidade);
 
-            return entidade;
+            return _mapper.Map<TabelaPrecoDTO>(entidade);
         }
 
-        public async Task<TabelaPreco> Handle(AtualizaTabelaPrecoCommand request, CancellationToken cancellationToken)
+        public async Task<TabelaPrecoDTO> Handle(AtualizaTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
             var entidade = await new TabelaPreco().Atualizar(request.Id, request.ProdutoId, request.Preco);
 
             if (entidade.IsValid)
                 await _tabelaPrecoRepository.Atualizar(entidade);
 
-            return entidade;
+            return _mapper.Map<TabelaPrecoDTO>(entidade);
         }
 
-        public async Task<TabelaPreco> Handle(DeletaTabelaPrecoCommand request, CancellationToken cancellationToken)
+        public async Task<TabelaPrecoDTO> Handle(DeletaTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
             var entidade = await new TabelaPreco().Deletar(request.Id);
 
             if (entidade.IsValid)
                 await _tabelaPrecoRepository.Atualizar(entidade);
 
-            return entidade;
+            return _mapper.Map<TabelaPrecoDTO>(entidade);
         }
     }
 }
