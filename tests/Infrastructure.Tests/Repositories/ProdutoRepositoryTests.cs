@@ -42,18 +42,15 @@ namespace Infrastructure.Tests.Repositories
             var novoDado = await new Produto().Cadastrar(categoria.Id, "Lanche", "Cadastro do primeiro Lanche");
             await _produtoRepository.Adicionar(novoDado);
 
-            Guid id = (_produtoRepository.ObterTodos().Result.FirstOrDefault() ?? new()).Id;
-            var dado = await _produtoRepository.ObterPorId(id) ?? new();
-
             //Act
-            await _produtoRepository.Atualizar(dado);
-            var dadoAtualizado = await _produtoRepository.ObterPorId(dado.Id) ?? new();
+            await _produtoRepository.Atualizar(novoDado);
+            var dadoAtualizado = await _produtoRepository.ObterPorId(novoDado.Id) ?? new();
 
             //Assert
             Assert.Multiple(() =>
             {
                 Assert.NotNull(dadoAtualizado);
-                Assert.Equal(dado.Id, dadoAtualizado.Id);
+                Assert.Equal(novoDado.Id, dadoAtualizado.Id);
             });
         }
 

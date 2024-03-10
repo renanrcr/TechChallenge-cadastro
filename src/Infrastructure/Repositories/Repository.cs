@@ -19,7 +19,7 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
-            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(predicate).ToListAsync();
+            return await DbSet.Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(predicate).AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> Existe(Expression<Func<TEntity, bool>> predicate)
@@ -29,12 +29,12 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public virtual async Task<TEntity?> ObterPorId(Guid id)
         {
-            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await DbSet.Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public virtual async Task<List<TEntity>> ObterTodos()
         {
-            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).ToListAsync();
+            return await DbSet.Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).AsNoTracking().ToListAsync();
         }
 
         public virtual async Task Adicionar(TEntity entity)

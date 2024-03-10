@@ -9,6 +9,7 @@ namespace Infrastructure.Tests.Context
         {
             var options = new DbContextOptionsBuilder<DataBaseContext>()
                 .UseInMemoryDatabase(databaseName: "DataBaseTests")
+                .EnableSensitiveDataLogging()
                 .Options;
 
             var dbContext = new DataBaseContext(options);
