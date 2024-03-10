@@ -7,6 +7,8 @@ namespace Domain.Validations.Produtos
         public CadastraProdutoValidation()
         {
             ValidarId();
+            ValidarNome();
+            ValidarDescricao();
         }
     }
 }

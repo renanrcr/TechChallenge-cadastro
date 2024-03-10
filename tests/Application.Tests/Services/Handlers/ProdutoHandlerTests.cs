@@ -11,6 +11,7 @@ namespace Application.Tests.Services.Handlers
     public class ProdutoHandlerTests
     {
         private readonly IProdutoRepository _produtoRepository;
+        private readonly ITabelaPrecoRepository _tabelaPrecoRepository;
         private readonly INotificador _notificador;
         private readonly IMapper _mapper;
         private readonly ProdutoHandler _produtoHandler;
@@ -18,12 +19,13 @@ namespace Application.Tests.Services.Handlers
         public ProdutoHandlerTests()
         {
             _produtoRepository = IProdutoRepositoryMock.GetMock();
+            _tabelaPrecoRepository = ITabelaPrecoRepositoryMock.GetMock();
             _notificador = new Notificador();
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperConfig>());
             _mapper = config.CreateMapper();
 
-            _produtoHandler = new ProdutoHandler(_notificador, _produtoRepository, _mapper);
+            _produtoHandler = new ProdutoHandler(_notificador, _produtoRepository, _tabelaPrecoRepository, _mapper);
         }
 
         [Fact]

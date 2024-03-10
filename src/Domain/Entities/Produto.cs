@@ -8,7 +8,7 @@ namespace Domain.Entities
         public string? Nome { get; private set; }
         public string? Descricao { get; private set; }
         public CategoriaProduto? CategoriaProduto { get; private set; }
-        public TabelaPreco TabelaPreco { get; private set; } = new TabelaPreco();
+        public TabelaPreco? TabelaPreco { get; private set; }
 
         public async Task<Produto> Cadastrar(Guid categoriaProdutoId, string? nome, string? descricao)
         {
@@ -17,28 +17,31 @@ namespace Domain.Entities
             Nome = nome;
             Descricao = descricao;
             DataCadastro = DateTime.Now;
+            TabelaPreco = new TabelaPreco();
 
             await Validate(this, new CadastraProdutoValidation());
 
             return this;
         }
 
-        public async Task<Produto> Atualizar(Guid id, Guid categoriaProdutoId, string? nome, string? descricao)
+        public async Task<Produto> Atualizar(Guid id, Guid categoriaProdutoId, string? nome, string? descricao, TabelaPreco? tabelaPreco)
         {
             Id = id;
             CategoriaProdutoId = categoriaProdutoId;
             Nome = nome;
             Descricao = descricao;
             DataAtualizacao = DateTime.Now;
+            TabelaPreco = tabelaPreco;
 
             await Validate(this, new AtualizaProdutoValidation());
 
             return this;
         }
 
-        public async Task<Produto> Deletar(Guid id)
+        public async Task<Produto> Deletar(Produto produto)
         {
-            Id = id;
+            await Atualizar(produto.Id, produto.CategoriaProdutoId, produto.Nome, produto.Descricao, produto.TabelaPreco);
+
             DataExclusao = DateTime.Now;
 
             await Validate(this, new DeletaProdutoValidation());

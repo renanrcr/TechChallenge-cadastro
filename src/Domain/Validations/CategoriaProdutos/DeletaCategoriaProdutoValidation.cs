@@ -1,10 +1,12 @@
-﻿using Domain.Validations.CategoriaProdutos.Base;
+﻿using Domain.Adapters;
+using Domain.Validations.CategoriaProdutos.Base;
 
 namespace Domain.Validations.CategoriaProdutos
 {
     public class DeletaCategoriaProdutoValidation : CategoriaProdutoBaseValidation
     {
-        public DeletaCategoriaProdutoValidation()
+        public DeletaCategoriaProdutoValidation(ICategoriaProdutoRepository categoriaProdutoRepository)
+            : base(categoriaProdutoRepository)
         {
             ValidarDataExclusao();
         }

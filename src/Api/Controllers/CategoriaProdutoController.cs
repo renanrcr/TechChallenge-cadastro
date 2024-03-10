@@ -45,9 +45,9 @@ namespace TechChallenge.Api.Controllers
             return Ok(_mapper.Map<IEnumerable<CategoriaProdutoDTO>>(categoriasProduto));
         }
 
-        [HttpPost("categorias_produto")]
+        [HttpPost("categoria_produto")]
         [SwaggerOperation(Summary = "Cadastrar categoria do produto", Description = "Cadastra a categoria.")]
-        public async Task<IActionResult?> Post(CadastraCategoriaProdutoCommand command)
+        public async Task<IActionResult?> Post([FromBody] CadastraCategoriaProdutoCommand command)
         {
             if (!ModelState.IsValid) return null;
 
@@ -58,9 +58,9 @@ namespace TechChallenge.Api.Controllers
             return Ok(entidade);
         }
 
-        [HttpPut("categorias_produto")]
+        [HttpPut("categoria_produto")]
         [SwaggerOperation(Summary = "Atualizar categoria do produto", Description = "Atualiza os dados da categoria cadastrado.")]
-        public async Task<IActionResult?> Put(AtualizaCategoriaProdutoCommand command)
+        public async Task<IActionResult?> Put([FromBody] AtualizaCategoriaProdutoCommand command)
         {
             if (!ModelState.IsValid) return null;
 
@@ -71,7 +71,7 @@ namespace TechChallenge.Api.Controllers
             return Ok(entidade);
         }
 
-        [HttpDelete("categorias_produto")]
+        [HttpDelete("categoria_produto")]
         [SwaggerOperation(Summary = "Deletar categoria do produto", Description = "Deleta a categoria informado.")]
         public async Task<IActionResult?> Delete(DeletaCategoriaProdutoCommand command)
         {

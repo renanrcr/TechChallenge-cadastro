@@ -15,9 +15,9 @@ namespace Domain.Entities
 
         public DateTime DataCadastro { get; protected set; } = DateTime.Now;
 
-        public DateTime DataAtualizacao { get; protected set; }
+        public DateTime DataAtualizacao { get; protected set; } = DateTime.MinValue;
 
-        public DateTime DataExclusao { get; protected set; }
+        public DateTime DataExclusao { get; protected set; } = DateTime.MinValue;
 
         [NotMapped]
         public bool IsValid => ValidationResult != null && ValidationResult.IsValid;

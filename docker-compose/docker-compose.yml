@@ -18,7 +18,7 @@ services:
         DbPort: "1433"
         DbUser: "SA"
         Password: "TechChallenge#Lanchonete"
-        Database: "lanchonete_cadastro"
+        Database: "lanchonete"
     depends_on:
       - sqlserver
 
