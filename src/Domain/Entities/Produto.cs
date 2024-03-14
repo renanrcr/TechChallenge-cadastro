@@ -17,7 +17,7 @@ namespace Domain.Entities
             Nome = nome;
             Descricao = descricao;
             DataCadastro = DateTime.Now;
-            TabelaPreco = new TabelaPreco();
+            TabelaPreco = await new TabelaPreco().Cadastrar(Id, 0m);
 
             await Validate(this, new CadastraProdutoValidation());
 

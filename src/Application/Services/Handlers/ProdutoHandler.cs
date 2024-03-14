@@ -59,6 +59,7 @@ namespace TechChallenge.src.Handlers
         public async Task<ProdutoDTO> Handle(DeletaProdutoCommand request, CancellationToken cancellationToken)
         {
             var produto = await _produtoRepository.ObterPorId(request.Id);
+
             if (produto != null)
             {
                 produto = await new Produto().Deletar(produto);

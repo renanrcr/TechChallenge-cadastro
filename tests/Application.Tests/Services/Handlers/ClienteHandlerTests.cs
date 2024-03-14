@@ -27,7 +27,7 @@ namespace Application.Tests.Services.Handlers
         }
 
         [Fact]
-        public void Cliente_DeveRetornarVerdadeiro_QuandoCadastrarNovo()
+        public async void Cliente_DeveRetornarVerdadeiro_QuandoCadastrarNovo()
         {
             //Arrange
             var command = new CadastraClienteCommand()
@@ -37,14 +37,14 @@ namespace Application.Tests.Services.Handlers
             };
 
             //Act
-            var result = _clienteHandler.Handle(command, default);
+            var result = await _clienteHandler.Handle(command, default);
 
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void Cliente_DeveRetornarVerdadeiro_QuandoAtualizar()
+        public async void Cliente_DeveRetornarVerdadeiro_QuandoAtualizar()
         {
             //Arrange
             var commandCadastrar = new CadastraClienteCommand()
@@ -52,7 +52,7 @@ namespace Application.Tests.Services.Handlers
                 Nome = "Cliente I",
                 Email = "cliente@mail.com",
             };
-            var dado = _clienteHandler.Handle(commandCadastrar, default).Result;
+            var dado = await _clienteHandler.Handle(commandCadastrar, default);
 
             var command = new AtualizaClienteCommand()
             {
@@ -62,14 +62,14 @@ namespace Application.Tests.Services.Handlers
             };
 
             //Act
-            var result = _clienteHandler.Handle(command, default);
+            var result = await _clienteHandler.Handle(command, default);
 
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void Cliente_DeveRetornarVerdadeiro_QuandoRemover()
+        public async void Cliente_DeveRetornarVerdadeiro_QuandoRemover()
         {
             //Arrange
             var commandCadastrar = new CadastraClienteCommand()
@@ -77,7 +77,7 @@ namespace Application.Tests.Services.Handlers
                 Nome = "Cliente I",
                 Email = "cliente@mail.com",
             };
-            var dado = _clienteHandler.Handle(commandCadastrar, default).Result;
+            var dado = await _clienteHandler.Handle(commandCadastrar, default);
 
             var command = new DeletaClienteCommand()
             {
@@ -85,7 +85,7 @@ namespace Application.Tests.Services.Handlers
             };
 
             //Act
-            var result = _clienteHandler.Handle(command, default);
+            var result = await _clienteHandler.Handle(command, default);
 
             //Assert
             Assert.NotNull(result);

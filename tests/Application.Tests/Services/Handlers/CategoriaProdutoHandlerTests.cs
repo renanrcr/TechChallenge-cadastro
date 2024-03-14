@@ -27,7 +27,7 @@ namespace Application.Tests.Services.Handlers
         }
 
         [Fact]
-        public void CategoriaProduto_DeveRetornarVerdadeiro_QuandoCadastrarNovo()
+        public async void CategoriaProduto_DeveRetornarVerdadeiro_QuandoCadastrarNovo()
         {
             //Arrange
             var command = new CadastraCategoriaProdutoCommand()
@@ -36,21 +36,21 @@ namespace Application.Tests.Services.Handlers
             };
 
             //Act
-            var result = _categoriaProdutoHandler.Handle(command, default);
+            var result = await _categoriaProdutoHandler.Handle(command, default);
 
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void CategoriaProduto_DeveRetornarVerdadeiro_QuandoAtualizar()
+        public async void CategoriaProduto_DeveRetornarFalso_QuandoNaoAtualizar()
         {
             //Arrange
             var commandCadastrar = new CadastraCategoriaProdutoCommand()
             {
                 Descricao = "Categoria Lanche",
             };
-            var dado = _categoriaProdutoHandler.Handle(commandCadastrar, default).Result;
+            var dado = await _categoriaProdutoHandler.Handle(commandCadastrar, default);
 
             var command = new AtualizaCategoriaProdutoCommand()
             {
@@ -59,21 +59,21 @@ namespace Application.Tests.Services.Handlers
             };
 
             //Act
-            var result = _categoriaProdutoHandler.Handle(command, default);
+            var result = await _categoriaProdutoHandler.Handle(command, default);
 
             //Assert
             Assert.NotNull(result);
         }
 
         [Fact]
-        public void CategoriaProduto_DeveRetornarVerdadeiro_QuandoRemover()
+        public async void CategoriaProduto_DeveRetornarVerdadeiro_QuandoRemover()
         {
             //Arrange
             var commandCadastrar = new CadastraCategoriaProdutoCommand()
             {
                 Descricao = "Categoria Lanche",
             };
-            var dado = _categoriaProdutoHandler.Handle(commandCadastrar, default).Result;
+            var dado = await _categoriaProdutoHandler.Handle(commandCadastrar, default);
 
             var command = new DeletaCategoriaProdutoCommand()
             {

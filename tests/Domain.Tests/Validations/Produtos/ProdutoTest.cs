@@ -21,7 +21,7 @@ namespace Domain.Tests.Validations.Produtos
             var categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
 
             //Act
-            var novoDado = new Produto().Cadastrar(categoria.Id, "Lanche", string.Empty).Result;
+            var novoDado = await new Produto().Cadastrar(categoria.Id, "Lanche", string.Empty);
 
             //Assert
             Assert.Multiple(() =>
@@ -39,7 +39,7 @@ namespace Domain.Tests.Validations.Produtos
             var categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
 
             //Act
-            var novoDado = new Produto().Cadastrar(categoria.Id, string.Empty, "Cadastro do primeiro Lanche").Result;
+            var novoDado = await new Produto().Cadastrar(categoria.Id, string.Empty, "Cadastro do primeiro Lanche");
 
             //Assert
             Assert.Multiple(() =>
@@ -57,7 +57,7 @@ namespace Domain.Tests.Validations.Produtos
             var categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
 
             //Act
-            var novoDado = new Produto().Cadastrar(categoria.Id, "Lanche", "Cadastro do primeiro Lanche").Result;
+            var novoDado = await new Produto().Cadastrar(categoria.Id, "Lanche", "Cadastro do primeiro Lanche");
 
             //Assert
             Assert.Multiple(() =>

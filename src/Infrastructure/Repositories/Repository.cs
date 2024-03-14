@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using TechChallenge.src.Adapters.Driven.Infra.DataContext;
 using Domain.Adapters;
 using Domain.Entities;
+using System.Collections.Generic;
 
 namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 {
@@ -19,7 +20,7 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
-            return await DbSet.Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(predicate).AsNoTracking().ToListAsync();
+            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(predicate).ToListAsync();
         }
 
         public async Task<bool> Existe(Expression<Func<TEntity, bool>> predicate)
@@ -29,28 +30,31 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public virtual async Task<TEntity?> ObterPorId(Guid id)
         {
-            return await DbSet.Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
+            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public virtual async Task<List<TEntity>> ObterTodos()
         {
-            return await DbSet.Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).AsNoTracking().ToListAsync();
+            return await DbSet.AsNoTracking().Where(x => x.DataExclusao.Date == DateTime.MinValue.Date).ToListAsync();
         }
 
         public virtual async Task Adicionar(TEntity entity)
         {
+            DetachLocal(_ => _.Id == entity.Id);
             DbSet.Add(entity);
             await SaveChanges();
         }
 
         public virtual async Task Atualizar(TEntity entity)
         {
+            DetachLocal(_ => _.Id == entity.Id);
             DbSet.Update(entity);
             await SaveChanges();
         }
 
         public virtual async Task Remover(TEntity entity)
         {
+            DetachLocal(_ => _.Id == entity.Id);
             DbSet.Remove(entity);
             await SaveChanges();
         }
@@ -63,6 +67,15 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
         public void Dispose()
         {
             Db?.Dispose();
+        }
+
+        public virtual void DetachLocal(Func<TEntity, bool> predicate)
+        {
+            var local = Db.Set<TEntity>().Local.Where(predicate).FirstOrDefault();
+            if(local != null)
+            {
+                DbSet.Entry(local).State = EntityState.Detached;
+            }
         }
     }
 }

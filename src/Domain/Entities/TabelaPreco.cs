@@ -5,10 +5,10 @@ namespace Domain.Entities
     public class TabelaPreco : EntidadeBase<Guid>
     {
         public Guid ProdutoId { get; set; }
-        public decimal Preco { get; private set; }
+        public decimal? Preco { get; private set; }
         public Produto? Produto { get; private set; }
 
-        public async Task<TabelaPreco> Cadastrar(Guid produtoId, decimal preco)
+        public async Task<TabelaPreco> Cadastrar(Guid produtoId, decimal? preco)
         {
             Id = Guid.NewGuid();
             ProdutoId = produtoId;
@@ -20,7 +20,7 @@ namespace Domain.Entities
             return this;
         }
 
-        public async Task<TabelaPreco> Atualizar(Guid id, Guid produtoId, decimal preco)
+        public async Task<TabelaPreco> Atualizar(Guid id, Guid produtoId, decimal? preco)
         {
             Id = id;
             ProdutoId = produtoId;

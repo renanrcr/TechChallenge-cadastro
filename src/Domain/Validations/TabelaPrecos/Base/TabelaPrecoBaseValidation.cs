@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Domain.Entities;
-using Domain.Validations;
+using Domain.ValueObjects;
 
 namespace Domain.Validations.TabelaPrecos.Base
 {
@@ -13,12 +13,12 @@ namespace Domain.Validations.TabelaPrecos.Base
 
         public void ValidarIdProduto()
         {
-            RuleFor(x => x.ProdutoId).NotNull().NotEmpty().WithMessage("Informe um Id de produto válido.");
+            RuleFor(x => x.ProdutoId).NotNull().NotEmpty().WithMessage(MensagemRetorno.TabelaPrecoInformeUmProduto);
         }
 
         public void ValidarPreco()
         {
-            RuleFor(x => x.Preco).NotNull().NotEmpty().WithMessage("Informe um preço.");
+            RuleFor(x => x.Preco).NotNull().NotEmpty().NotEqual(0).WithMessage(MensagemRetorno.TabelaPrecoInformeUmPreco);
         }
     }
 }

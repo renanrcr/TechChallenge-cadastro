@@ -9,6 +9,7 @@ namespace Infrastructure.Tests.Adapters
         public static ICategoriaProdutoRepository GetMock()
         {
             var dbContext = DataBaseContextTests.CreateDbContext();
+
             return new CategoriaProdutoRepository(dbContext);
         }
     }

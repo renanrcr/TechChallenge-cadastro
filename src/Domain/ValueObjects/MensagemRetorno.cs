@@ -8,5 +8,8 @@
 
         public const string ProdutoInformeUmNome = "Informe um nome para o produto.";
         public const string ProdutoInformeUmaDescricao = "Informe uma descrição para o produto.";
+
+        public const string TabelaPrecoInformeUmProduto = "Informe um Id de produto válido.";
+        public const string TabelaPrecoInformeUmPreco = "Informe um preço.";
     }
 }

@@ -38,7 +38,7 @@ namespace Infrastructure.Tests.Repositories
             var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com");
             await _clienteRepository.Adicionar(novoDado);
 
-            Guid id = (_clienteRepository.ObterTodos().Result.FirstOrDefault() ?? new()).Id;
+            Guid id = ((await _clienteRepository.ObterTodos()).FirstOrDefault() ?? new()).Id;
             var dado = await _clienteRepository.ObterPorId(id) ?? new();
 
             //Act

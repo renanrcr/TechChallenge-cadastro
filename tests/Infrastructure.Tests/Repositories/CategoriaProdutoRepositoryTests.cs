@@ -38,7 +38,7 @@ namespace Infrastructure.Tests.Repositories
             var novoDado = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
             await _categoriaProdutoRepository.Adicionar(novoDado);
 
-            Guid id = (_categoriaProdutoRepository.ObterTodos().Result.FirstOrDefault() ?? new()).Id;
+            Guid id = ((await _categoriaProdutoRepository.ObterTodos()).FirstOrDefault() ?? new()).Id;
             var dado = await _categoriaProdutoRepository.ObterPorId(id) ?? new();
 
             //Act
