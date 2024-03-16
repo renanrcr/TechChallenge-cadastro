@@ -9,8 +9,6 @@ namespace Domain.Validations.Clientes
             : base(clienteRepository)
         {
             ValidarExisteClienteCadastrado();
-            ValidarNome();
-            ValidarEmail();
             ValidarDataAtualizacao();
         }
     }

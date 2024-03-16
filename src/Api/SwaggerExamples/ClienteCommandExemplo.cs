@@ -11,6 +11,7 @@ namespace API.SwaggerExamples
             {
                 Nome = "TechChallenge",
                 Email = "cliente@mail.com.br",
+                CPF = "000.000.000-00",
             });
         }
     }
@@ -24,6 +25,7 @@ namespace API.SwaggerExamples
                 Id = new Guid("13dfb2a8-868a-4587-a1df-82288210c54c"),
                 Nome = "TechChallenge",
                 Email = "techChallenge@mail.com.br",
+                CPF = "000.000.000-00",
             });
         }
     }

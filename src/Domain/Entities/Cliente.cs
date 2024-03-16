@@ -7,12 +7,14 @@ namespace Domain.Entities
     {
         public string? Nome { get; private set; }
         public string? Email { get; private set; }
+        public string? CPF { get; private set; }
 
-        public async Task<Cliente> Cadastrar(IClienteRepository clienteRepository, string? nome, string? email)
+        public async Task<Cliente> Cadastrar(IClienteRepository clienteRepository, string? nome, string? email, string? cpf)
         {
             Id = Guid.NewGuid();
             Nome = nome;
             Email = email;
+            CPF = cpf;
             DataCadastro = DateTime.Now;
 
             await Validate(this, new CadastraClienteValidation(clienteRepository));
@@ -20,11 +22,12 @@ namespace Domain.Entities
             return this;
         }
 
-        public async Task<Cliente> Atualizar(IClienteRepository clienteRepository, Guid id, string? nome, string? email)
+        public async Task<Cliente> Atualizar(IClienteRepository clienteRepository, Guid id, string? nome, string? email, string? cpf)
         {
             Id = id;
             Nome = nome;
             Email = email;
+            CPF = cpf;
             DataAtualizacao = DateTime.Now;
 
             await Validate(this, new AtualizaClienteValidation(clienteRepository));

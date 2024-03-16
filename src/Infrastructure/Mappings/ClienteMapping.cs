@@ -18,6 +18,10 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Mappings
                 .IsRequired()
                 .HasColumnType("varchar(200)");
 
+            builder.Property(p => p.CPF)
+                .IsRequired()
+                .HasColumnType("varchar(11)");
+
             builder.ToTable("Cliente");
         }
     }

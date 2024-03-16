@@ -19,7 +19,7 @@ namespace Domain.Tests.Validations.Clientes
             //Arrange
 
             //Act
-            var novoDado = await new Cliente().Cadastrar(_clienteRepository, null, "cliente@mail.com");
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, null, "cliente@mail.com", string.Empty);
 
             //Assert
             Assert.Multiple(() =>
@@ -35,7 +35,7 @@ namespace Domain.Tests.Validations.Clientes
             //Arrange
 
             //Act
-            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", string.Empty);
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", string.Empty, string.Empty);
 
             //Assert
             Assert.Multiple(() =>

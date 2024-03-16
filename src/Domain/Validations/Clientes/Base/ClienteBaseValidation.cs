@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Domain.Adapters;
 using Domain.Entities;
+using Domain.ValueObjects;
 
 namespace Domain.Validations.Clientes.Base
 {
@@ -13,19 +14,25 @@ namespace Domain.Validations.Clientes.Base
             _clienteRepository = clienteRepository;
 
             ValidarId();
-        }
-
-        public void ValidarNome()
-        {
-            RuleFor(x => x.Nome).Null().Empty().WithMessage("Informe um nome.");
+            ValidarValorCPF();
+            ValidarEmail();
         }
 
         public void ValidarEmail()
         {
-            RuleFor(s => s.Email).NotEmpty().WithMessage("É obrigatório um e-mail.")
-                     .EmailAddress().WithMessage("É necessário um e-mail válido.")
+            RuleFor(s => s.Email).NotEmpty().EmailAddress().WithMessage("É necessário um e-mail válido.")
                      .MustAsync(ExisteEmailCadastradoAsync).WithMessage("Este e-mail já existe em nossa base.");
         }
+
+        public void ValidarValorCPF()
+        {
+            RuleFor(x => x.CPF).Must((x, cpf) =>
+            {
+                return !(!string.IsNullOrEmpty(cpf) && ValidarCPF(x.CPF));
+            }).WithMessage("Informe um CPF válido."); ;
+        }
+
+        private bool ValidarCPF(string? valor) => new CPF(valor).IsValidado;
 
         public void ValidarExisteClienteCadastrado()
         {

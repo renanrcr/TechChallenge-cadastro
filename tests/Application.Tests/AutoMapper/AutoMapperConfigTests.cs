@@ -41,7 +41,7 @@ namespace Application.Tests.AutoMapper
         public async Task MapearClienteParaClienteDto_DeveRetornarVerdadeiro()
         {
             // Arrange
-            Cliente? cliente = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com");
+            Cliente? cliente = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com", "537.188.070-41");
 
             // Act
             ClienteDTO clienteDTO = _mapper.Map<ClienteDTO>(cliente);

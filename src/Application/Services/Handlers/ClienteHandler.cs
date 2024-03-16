@@ -27,7 +27,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ClienteDTO> Handle(CadastraClienteCommand request, CancellationToken cancellationToken)
         {
-            Cliente entidade = await new Cliente().Cadastrar(_clienteRepository, request.Nome, request.Email);
+            Cliente entidade = await new Cliente().Cadastrar(_clienteRepository, request.Nome, request.Email, request.CPF);
 
             Notificar(entidade.ValidationResult);
 
@@ -39,7 +39,7 @@ namespace TechChallenge.src.Handlers
 
         public async Task<ClienteDTO> Handle(AtualizaClienteCommand request, CancellationToken cancellationToken)
         {
-            Cliente entidade = await new Cliente().Atualizar(_clienteRepository, request.Id, request.Nome, request.Email);
+            Cliente entidade = await new Cliente().Atualizar(_clienteRepository, request.Id, request.Nome, request.Email, request.CPF);
 
             Notificar(entidade.ValidationResult);
 

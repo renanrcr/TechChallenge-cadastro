@@ -17,7 +17,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task Cliente_DeveRetornarVerdadeiro_QuandoCriarNovo()
         {
             //Arrange
-            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com");
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com", string.Empty);
 
             //Act
             await _clienteRepository.Adicionar(novoDado);
@@ -35,7 +35,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task Cliente_DeveRetornarVerdadeiro_QuandoAtualizar()
         {
             //Arrange
-            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com");
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com", string.Empty);
             await _clienteRepository.Adicionar(novoDado);
 
             Guid id = ((await _clienteRepository.ObterTodos()).FirstOrDefault() ?? new()).Id;
@@ -57,7 +57,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task Cliente_DeveRetornarVerdadeiro_QuandoTiverTodosAsIndentificacoes()
         {
             //Arrange
-            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com");
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com", string.Empty);
             await _clienteRepository.Adicionar(novoDado);
 
             //Act
@@ -75,7 +75,7 @@ namespace Infrastructure.Tests.Repositories
         public async Task Cliente_DeveRetornarVerdadeiro_QuandoEncontrarPeloID()
         {
             //Arrange
-            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com");
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com", string.Empty);
             await _clienteRepository.Adicionar(novoDado);
             Guid id = ((await _clienteRepository.ObterTodos()).FirstOrDefault() ?? new()).Id;
 

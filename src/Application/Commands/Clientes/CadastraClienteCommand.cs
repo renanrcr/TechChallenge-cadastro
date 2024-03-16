@@ -17,5 +17,11 @@ namespace Application.Commands.Clientes
             Description = "E-mail do cliente",
             Format = "string")]
         public string? Email { get; set; }
+
+        [SwaggerSchema(
+            Title = "CPF",
+            Description = "CPF do cliente",
+            Format = "string")]
+        public string? CPF { get; set; }
     }
 }
