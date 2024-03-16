@@ -11,5 +11,6 @@
 
         public const string TabelaPrecoInformeUmProduto = "Informe um Id de produto válido.";
         public const string TabelaPrecoInformeUmPreco = "Informe um preço.";
+        public const string TabelaPrecoNaoEncontrada = "A tabela de preço informada não foi encontrada.";
     }
 }

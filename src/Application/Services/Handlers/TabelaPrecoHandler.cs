@@ -5,6 +5,7 @@ using Application.Commands.TabelaPrecos;
 using Application.DTOs;
 using AutoMapper;
 using Application.Services;
+using Domain.ValueObjects;
 
 namespace TechChallenge.src.Handlers
 {
@@ -39,7 +40,16 @@ namespace TechChallenge.src.Handlers
 
         public async Task<TabelaPrecoDTO> Handle(AtualizaTabelaPrecoCommand request, CancellationToken cancellationToken)
         {
-            var entidade = await new TabelaPreco().Atualizar(request.Id, request.ProdutoId, request.Preco);
+            var tabelaPreco = await _tabelaPrecoRepository.ObterPorId(request.Id);
+
+            if(tabelaPreco == null)
+            {
+                Notificar(MensagemRetorno.TabelaPrecoNaoEncontrada);
+
+                return new TabelaPrecoDTO();
+            }
+
+            var entidade = await new TabelaPreco().Atualizar(tabelaPreco.Id, tabelaPreco.ProdutoId, request.Preco);
 
             Notificar(entidade.ValidationResult);
 
