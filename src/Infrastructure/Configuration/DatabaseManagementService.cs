@@ -13,9 +13,11 @@ namespace Infrastructure.Configuration
             {
                 var dbContext = scope.ServiceProvider
                     .GetRequiredService<DataBaseContext>();
-                dbContext.Database.EnsureCreated();
-                // Here is the migration executed
-                dbContext.Database.Migrate();
+
+                if (dbContext.Database.GetPendingMigrations().Any())
+                {
+                    dbContext.Database.Migrate();
+                }
             }
         }
     }
