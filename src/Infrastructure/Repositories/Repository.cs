@@ -71,7 +71,7 @@ namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 
         public virtual void DetachLocal(Func<TEntity, bool> predicate)
         {
-            var local = Db.Set<TEntity>().Local.Where(predicate).FirstOrDefault();
+            var local = Db.Set<TEntity>().Local.FirstOrDefault(predicate);
             if(local != null)
             {
                 DbSet.Entry(local).State = EntityState.Detached;

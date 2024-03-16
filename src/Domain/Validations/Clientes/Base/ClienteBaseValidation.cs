@@ -29,7 +29,7 @@ namespace Domain.Validations.Clientes.Base
             RuleFor(x => x.CPF).Must((x, cpf) =>
             {
                 return !(!string.IsNullOrEmpty(cpf) && ValidarCPF(x.CPF));
-            }).WithMessage("Informe um CPF válido."); ;
+            }).WithMessage("Informe um CPF válido.");
         }
 
         private bool ValidarCPF(string? valor) => new CPF(valor).IsValidado;
