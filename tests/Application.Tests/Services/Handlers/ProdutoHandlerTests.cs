@@ -4,13 +4,11 @@ using AutoMapper;
 using Domain.Adapters;
 using Domain.Entities;
 using Domain.Notificacoes;
+using Domain.ValueObjects;
 using Infrastructure.Tests.Adapters;
-using Infrastructure.Tests.Context;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.OpenApi.Writers;
 using Moq;
-using System;
-using TechChallenge.src.Adapters.Driven.Infra.Repositories;
+using Newtonsoft.Json;
 using TechChallenge.src.Handlers;
 
 namespace Application.Tests.Services.Handlers
@@ -24,16 +22,12 @@ namespace Application.Tests.Services.Handlers
         private readonly IMapper _mapper;
         private readonly ProdutoHandler _produtoHandler;
 
-        private readonly DbContext _dbContext;
-
         public ProdutoHandlerTests()
         {
             _produtoRepository = IProdutoRepositoryMock.GetMock();
             _tabelaPrecoRepository = ITabelaPrecoRepositoryMock.GetMock();
             _categoriaProdutoRepository = ICategoriaProdutoRepositoryMock.GetMock();
             _notificador = new Notificador();
-
-            _dbContext = DataBaseContextTests.CreateDbContext();
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperConfig>());
             _mapper = config.CreateMapper();
@@ -98,6 +92,25 @@ namespace Application.Tests.Services.Handlers
 
             //Assert
             Assert.Null(result);
+        }
+
+        [Fact]
+        public async void Produto_DeveRetornarFalse_QuandoNaoEncontrarNome()
+        {
+            //Arrange
+            var command = new CadastraProdutoCommand()
+            {
+                CategoriaProdutoId = Guid.NewGuid(),
+                Nome = "",
+                Descricao = "Cadastro do primeiro Lanche",
+            };
+
+            //Act
+            var dado = await _produtoHandler.Handle(command, default);
+
+            //Assert
+            Assert.NotNull(dado);
+            Assert.True(_notificador.TemNotificacao());
         }
     }
 }

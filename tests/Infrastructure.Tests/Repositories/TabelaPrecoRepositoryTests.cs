@@ -102,5 +102,27 @@ namespace Infrastructure.Tests.Repositories
                 Assert.Equal(dado.Id, id);
             });
         }
+
+        [Fact]
+        public async Task TabelaPreco_DeveRetornarVerdadeiro_QuandoExcluir()
+        {
+            //Arrange
+            var categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
+            var produto = await new Produto().Cadastrar(categoria.Id, "Lanche", "Cadastro do primeiro Lanche");
+            await _produtoRepository.Adicionar(produto);
+            var novoDado = await new TabelaPreco().Cadastrar(produto.Id, preco: 43.50m);
+            await _tabelaPrecoRepository.Adicionar(novoDado);
+            var tabelaPreco = await _tabelaPrecoRepository.ObterPorId(novoDado.Id) ?? new();
+
+            //Act
+            await _tabelaPrecoRepository.Remover(tabelaPreco);
+            var dado = await _tabelaPrecoRepository.ObterPorId(tabelaPreco.Id);
+
+            //Assert
+            Assert.Multiple(() =>
+            {
+                Assert.Null(dado);
+            });
+        }
     }
 }

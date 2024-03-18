@@ -92,5 +92,22 @@ namespace Infrastructure.Tests.Repositories
                 Assert.Equal(dado.Id, id);
             });
         }
+
+        [Fact]
+        public async Task Produto_DeveRetornarVerdadeiro_QuandoExcluir()
+        {
+            //Arrange
+            var categoria = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
+            var novoDado = await new Produto().Cadastrar(categoria.Id, "Lanche", "Cadastro do primeiro Lanche");
+            await _produtoRepository.Adicionar(novoDado);
+            var produto = await _produtoRepository.ObterPorId(novoDado.Id) ?? new();
+
+            //Act
+            var produtoExcluir = await new Produto().Deletar(produto);
+            await _produtoRepository.Atualizar(produtoExcluir);
+
+            //Assert
+            Assert.NotEqual(DateTime.MinValue, produtoExcluir!.DataExclusao);
+        }
     }
 }

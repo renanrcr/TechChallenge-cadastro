@@ -89,5 +89,21 @@ namespace Infrastructure.Tests.Repositories
                 Assert.Equal(dado.Id, id);
             });
         }
+
+        [Fact]
+        public async Task CategoriaProduto_DeveRetornarVerdadeiro_QuandoExcluir()
+        {
+            //Arrange
+            var novoDado = await new CategoriaProduto().Cadastrar(_categoriaProdutoRepository, "Categoria Lanche");
+            await _categoriaProdutoRepository.Adicionar(novoDado);
+            var categoria = await _categoriaProdutoRepository.ObterPorId(novoDado.Id) ?? new();
+
+            //Act
+            await _categoriaProdutoRepository.Remover(categoria);
+            var categoriaExcluida = await _categoriaProdutoRepository.ObterPorId(novoDado.Id) ?? new();
+
+            //Assert
+            Assert.Equal(Guid.Empty, categoriaExcluida.Id);
+        }
     }
 }

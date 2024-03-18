@@ -1,5 +1,4 @@
 ﻿using Application.AutoMapper;
-using Application.Commands.CategoriaProdutos;
 using Application.Commands.Clientes;
 using Application.DTOs;
 using AutoMapper;

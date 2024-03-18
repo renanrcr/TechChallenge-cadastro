@@ -10,7 +10,6 @@ namespace Application.Tests.AutoMapper
     public class AutoMapperConfigTests
     {
         private readonly IMapper _mapper;
-        private readonly IProdutoRepository _produtoRepository;
         private readonly IClienteRepository _clienteRepository;
         private readonly ICategoriaProdutoRepository _categoriaProdutoRepository;
 
@@ -18,7 +17,6 @@ namespace Application.Tests.AutoMapper
         {
             var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoMapperConfig>());
             _mapper = config.CreateMapper();
-            _produtoRepository = IProdutoRepositoryMock.GetMock();
             _clienteRepository = IClienteRepositoryMock.GetMock();
             _categoriaProdutoRepository = ICategoriaProdutoRepositoryMock.GetMock();
         }

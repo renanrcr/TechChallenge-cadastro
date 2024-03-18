@@ -89,5 +89,21 @@ namespace Infrastructure.Tests.Repositories
                 Assert.Equal(dado.Id, id);
             });
         }
+
+        [Fact]
+        public async Task Cliente_DeveRetornarVerdadeiro_QuandoExcluir()
+        {
+            //Arrange
+            var novoDado = await new Cliente().Cadastrar(_clienteRepository, "Cliente I", "cliente@mail.com", string.Empty);
+            await _clienteRepository.Adicionar(novoDado);
+            var cliente = await _clienteRepository.ObterPorId(novoDado.Id) ?? new();
+
+            //Act
+            await _clienteRepository.Remover(cliente);
+            var clienteExcluido = await _clienteRepository.ObterPorId(novoDado.Id) ?? new();
+
+            //Assert
+            Assert.Equal(Guid.Empty, clienteExcluido.Id);
+        }
     }
 }

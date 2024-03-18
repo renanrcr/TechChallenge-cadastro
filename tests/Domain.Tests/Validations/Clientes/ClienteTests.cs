@@ -30,7 +30,7 @@ namespace Domain.Tests.Validations.Clientes
         }
 
         [Fact]
-        public async Task Cliente_DeveRetornarFalso_QuandoNaoExistirEmail()
+        public async Task Cliente_DeveRetornarVerdadeiro_QuandoNaoExistirEmail()
         {
             //Arrange
 
@@ -41,7 +41,7 @@ namespace Domain.Tests.Validations.Clientes
             Assert.Multiple(() =>
             {
                 Assert.NotNull(novoDado);
-                Assert.False(novoDado.IsValid);
+                Assert.True(novoDado.IsValid);
             });
         }
     }

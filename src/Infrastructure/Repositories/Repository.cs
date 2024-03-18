@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using TechChallenge.src.Adapters.Driven.Infra.DataContext;
 using Domain.Adapters;
 using Domain.Entities;
-using System.Collections.Generic;
 
 namespace TechChallenge.src.Adapters.Driven.Infra.Repositories
 {

@@ -20,8 +20,11 @@ namespace Domain.Validations.Clientes.Base
 
         public void ValidarEmail()
         {
-            RuleFor(s => s.Email).NotEmpty().EmailAddress().WithMessage("É necessário um e-mail válido.")
+            When(s => !string.IsNullOrEmpty(s.Email), () => {
+                RuleFor(s => s.Email)
+                .EmailAddress().WithMessage("É necessário um e-mail válido.")
                      .MustAsync(ExisteEmailCadastradoAsync).WithMessage("Este e-mail já existe em nossa base.");
+            });
         }
 
         public void ValidarValorCPF()
