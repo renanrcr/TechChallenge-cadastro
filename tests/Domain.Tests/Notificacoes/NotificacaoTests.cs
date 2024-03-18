@@ -4,11 +4,11 @@ using Moq;
 
 namespace Domain.Tests.Notificacoes
 {
-    public class NotificacaoTest
+    public class NotificacaoTests
     {
         private readonly INotificador _notificador;
 
-        public NotificacaoTest()
+        public NotificacaoTests()
         {
             _notificador = new Notificador();
         }

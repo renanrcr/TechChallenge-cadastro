@@ -2,7 +2,7 @@
 
 namespace Domain.Tests.ValueObjects
 {
-    public class CPFTest
+    public class CPFTests
     {
         [Fact]
         public void CPF_DeveRetornarVerdadeiro_QuandoEhValido()
@@ -13,10 +13,7 @@ namespace Domain.Tests.ValueObjects
             var cpf = new CPF("24364711004");
 
             //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.True(cpf.IsValidado);
-            });
+            Assert.True(cpf.IsValidado);
         }
 
         [Fact]
@@ -28,10 +25,19 @@ namespace Domain.Tests.ValueObjects
             var cpf = new CPF("24364711777");
 
             //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.False(cpf.IsValidado);
-            });
+            Assert.False(cpf.IsValidado);
+        }
+
+        [Fact]
+        public void CPF_DeveRetornarVerdadeiro_QuandoEstiverFormatado()
+        {
+            //Arrange
+
+            //Act
+            var cpf = new CPF("243.647.110-04");
+
+            //Assert
+            Assert.True(cpf.IsValidado);
         }
     }
 }

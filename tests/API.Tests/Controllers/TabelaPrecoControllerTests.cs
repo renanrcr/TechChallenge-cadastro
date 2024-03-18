@@ -83,6 +83,30 @@ namespace API.Tests.Controllers
         }
 
         [Fact]
+        public async void TabelaPreco_DeveRetornarFalse_QuandoNaoTiverPreco()
+        {
+            //Arrange
+            var command = new CadastraTabelaPrecoCommand()
+            {
+                ProdutoId = Guid.NewGuid(),
+                Preco = 0m,
+            };
+
+            _mediatorMock.Setup(x => x.Send(It.IsAny<CadastraTabelaPrecoCommand>(), It.IsAny<CancellationToken>()))
+               .ReturnsAsync(new TabelaPrecoDTO
+               {
+                   Id = Guid.NewGuid(),
+                   Preco = 0m,
+               });
+
+            //Act
+            var result = await _tabelaPrecoController.Post(command);
+
+            //Assert
+            Assert.False(_notification.Object.TemNotificacao());
+        }
+
+        [Fact]
         public async void TabelaPreco_DeveRetornarVerdadeiro_QuandoDeletarPreco()
         {
             //Arrange
